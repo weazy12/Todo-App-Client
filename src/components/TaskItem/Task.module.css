@@ -1,0 +1,28 @@
+.item{
+    padding: 10px 10px;
+}
+.item-title{
+    font-size: 16px;
+}
+.due-date{
+    font-size: 15px;
+}
+
+.item-wrap{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;  
+}
+.item-texts{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.item-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}

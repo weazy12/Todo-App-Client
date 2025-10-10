@@ -1,0 +1,30 @@
+.column-wrapper{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.column-items-wrapper{
+    text-align: start;
+    min-width: 250px;
+    min-height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);   
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.todoTitle {
+  color: #28a745;
+}
+
+.inProgressTitle {
+  color: #ffc107;
+}
+
+.doneTitle {
+  color: #c108f0;
+}
