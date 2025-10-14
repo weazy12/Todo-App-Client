@@ -2,7 +2,7 @@ import TaskItem from '../TaskItem/TaskItem'
 import styles from './Column.module.css'
 import type { ColumnProps } from './Column.props'
 
-export default function Column({title, tasks}: ColumnProps){
+export default function Column({title, tasks, onDeleteTask}: ColumnProps){
 
     const titleClass =
     title === 'ToDo'
@@ -17,7 +17,7 @@ export default function Column({title, tasks}: ColumnProps){
             <div className={styles['column-items-wrapper']}>
                 {
                     tasks.map(task => (
-                        <TaskItem key={task.id} task={task}/>
+                        <TaskItem key={task.id} task={task} onDelete={onDeleteTask}/>
                     ))
                 }
             </div>
