@@ -14,3 +14,31 @@
     padding: 50px 50px;
 
 }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+    
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  min-width: 350px;
+  animation: fadeIn 0.2s ease-in;
+}
+
+
+.btnClose {
+  background: #ccc;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+}

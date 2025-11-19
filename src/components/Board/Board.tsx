@@ -8,7 +8,7 @@ import CreateTaskForm from '../CreateToDoTask/CreateToDoTask';
 
 function Board(){
         const [tasks, setTasks] = useState<TodoTask[]>([]);
-        
+        const [openModal, setOpenModal] = useState(false);
         const getTasks = async () =>{
             try {
                 const {data} = await axios.get<TodoTask[]>(`${PREFIX}/ToDoTask`);
@@ -34,9 +34,30 @@ function Board(){
         };
     return(
         <div className={styles['board']}>
-            <div>
-                <CreateTaskForm onTaskCreated={getTasks}/>
-            </div>
+            <button className={styles['create-btn']} onClick={() => setOpenModal(true)}>+ Create task</button>
+        {openModal && (
+                <div className={styles.overlay}>
+          <div className={styles.modal}>
+            
+            <h2>Create Task</h2>
+
+            <CreateTaskForm 
+              onTaskCreated={() => {
+                getTasks();
+                setOpenModal(false); // закрити модалку після створення
+              }}
+            />
+
+            <button 
+              onClick={() => setOpenModal(false)}
+              className={styles.btnClose}
+            >
+              Close
+            </button>
+
+          </div>
+        </div>
+            )}
             <div className={styles['column-wrapper']}>
                 <Column title="ToDo" tasks={tasks.filter(t => t.status === 0)} onDeleteTask={handleDeleteTask}/>
                 <Column title="InProgress" tasks={tasks.filter(t => t.status === 1)} onDeleteTask={handleDeleteTask}/>
