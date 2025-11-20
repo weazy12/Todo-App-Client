@@ -5,9 +5,10 @@ import styles from './Task.module.css'
 interface TaskItemProps {
   task: TodoTask;
    onDelete: (id: number) => void;
+   onEdit: (task: TodoTask) => void;
 } 
 
-function TaskItem({ task, onDelete}: TaskItemProps){
+function TaskItem({ task, onDelete, onEdit}: TaskItemProps){
     return(
          <div className={styles['item']}>
           <div className={styles['item-wrap']}>
@@ -16,7 +17,7 @@ function TaskItem({ task, onDelete}: TaskItemProps){
                 <h3 className={styles['due-date']}>due-date: {task.dueDate.split("T")[0]}</h3>
               </div>
               <div className={styles['item-buttons']}>
-                <button>Edit</button>
+                <button onClick={() => onEdit(task)}>Edit</button>
                 <DeleteTodoTaskBtn onClick={() => onDelete(task.id)}/>
               </div>
           </div>
