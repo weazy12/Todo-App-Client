@@ -26,7 +26,6 @@ export default function EditTodoTaskBtn({
     try {
       await axios.put(`${PREFIX}/ToDoTask`, form)
       onTaskEdited()
-      setForm({ id: task.id, title: '', description: '', dueDate: '' })
     } catch (err) {
       console.error(err)
       alert('Помилка при редагуванні задачі')

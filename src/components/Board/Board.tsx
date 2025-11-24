@@ -15,8 +15,8 @@ function Board() {
   const [taskToEdit, setTaskToEdit] = useState<TodoTask | null>(null);
 
   const handleEditTask = (task: TodoTask) => {
-  setTaskToEdit(task);       // зберігаємо дані
-  setOpenEditModal(true);    // відкриваємо модалку
+  setTaskToEdit(task);
+  setOpenEditModal(true);
 };
 
   const getTasks = async () => {
