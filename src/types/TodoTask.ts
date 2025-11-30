@@ -1,6 +1,6 @@
 export type Status = 0 | 1 | 2;
 
-export interface TodoTask{
+export interface TodoTaskDto{
     id: number;
     title: string;
     description?: string;
@@ -9,3 +9,17 @@ export interface TodoTask{
     createdAt: string;
     completedAt: string;
 }
+
+export interface CreateTodoTaskDto {
+    title: string;
+    description?: string;
+    dueDate: string;
+}
+
+export interface UpdateTodoTaskDto {
+    id: number;
+    title: string;
+    description?: string;
+    dueDate: string;
+}
+

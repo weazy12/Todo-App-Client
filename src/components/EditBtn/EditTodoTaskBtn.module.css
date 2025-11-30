@@ -1,0 +1,18 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+.header{
+    margin-bottom: 20px;
+}
+.inputsDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.updateBtn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

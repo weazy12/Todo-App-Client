@@ -1,67 +1,70 @@
-import type { EditTodoTaskBtnProps } from './EditTodoTaskBtn.props'
-import { useState } from 'react'
-import { PREFIX } from '../../helpers/API'
-import type UpdateTodoTaskDto from '../../types/UpdateTodoTaskDto'
-import axios from 'axios'
+import type {TodoTaskDto} from "../../types/TodoTask.ts";
+import {type FormEvent, useState} from "react";
+import {useAppDispatch} from "../../hooks/redux.ts";
+import {updateTodoTask} from "../../store/reducers/TodoSlice.ts";
+import styles from "./EditTodoTaskBtn.module.css"
 
-export default function EditTodoTaskBtn({
-  task,
-  onTaskEdited,
-}: EditTodoTaskBtnProps) {
-  const [form, setForm] = useState<UpdateTodoTaskDto>({
-    id: task.id,
-    title: task.title,
-    description: task.description,
-    dueDate: task.dueDate.split("T")[0],
-  })
+interface EditTodoTaskBtn {
+    task: TodoTaskDto,
+    onTaskUpdated: () => void,
+}
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
-   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    try {
-      await axios.put(`${PREFIX}/ToDoTask`, form)
-      onTaskEdited()
-    } catch (err) {
-      console.error(err)
-      alert('Помилка при редагуванні задачі')
+export default function EditTodoTaskBtn({task, onTaskUpdated}: EditTodoTaskBtn) {
+    const [title,setTitle] = useState(task.title);
+    const [description, setDescription] = useState(task.description);
+    const [dueDate, setDueDate] = useState(task.dueDate);
+
+    const [error, setError] = useState<string|null>(null);
+    const [loading, setLoading] = useState(false);
+
+    const  dispatch = useAppDispatch();
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        try{
+            await dispatch(updateTodoTask({...task, title, description, dueDate})).unwrap();
+            onTaskUpdated();
+        } catch(error: unknown){
+            if (error instanceof Error) setError(error.message);
+            else setError(String(error) || "Cannot update task.");
+        } finally {
+            setLoading(false);
+        }
     }
-  }
   return (
-    <form  onSubmit={handleSubmit}>
-      <h3 >Edit task</h3>
-      <div>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h3 className={styles.header}>Edit task</h3>
+      <div className={styles.inputsDiv}>
         <input
          type='text'
          name='id'
-         value={form.id}
          readOnly
+         value={task.id}
         />
         <input
           type="text"
           name="title"
-          value={form.title}
-          onChange={handleChange}
           required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           name="description"
-          value={form.description}
-          onChange={handleChange}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="date"
           name="dueDate"
-          value={form.dueDate}
-          onChange={handleChange}
           required
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
         />
       </div>
-      <button type="submit">Save</button>
+        {error && <p style={{color: "red"}}>{error}</p>}
+      <button className={styles.updateBtn} type="submit" disabled={loading}>Update</button>
     </form>
   )
 }

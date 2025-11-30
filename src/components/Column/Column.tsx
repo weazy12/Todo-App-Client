@@ -5,8 +5,6 @@ import type { ColumnProps } from './Column.props'
 export default function Column({
   title,
   tasks,
-  onDeleteTask,
-  onEditTask,
 }: ColumnProps) {
   const titleClass =
     title === 'ToDo'
@@ -23,8 +21,6 @@ export default function Column({
           <TaskItem
             key={task.id}
             task={task}
-            onDelete={onDeleteTask}
-            onEdit={onEditTask}
           />
         ))}
       </div>

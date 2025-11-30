@@ -1,14 +1,26 @@
-import type { TodoTask } from "../../types/TodoTask";
-import DeleteTodoTaskBtn from "../DeleteBtn/DeleteTodoTaskBtn";
+import type {TodoTaskDto} from "../../types/TodoTask";
 import styles from './Task.module.css'
+import {useAppDispatch} from "../../hooks/redux.ts";
+import {deleteTodoTask} from "../../store/reducers/TodoSlice.ts";
+import {useState} from "react";
+import EditTodoTaskBtn from "../EditBtn/EditTodoTaskBtn.tsx";
 
 interface TaskItemProps {
-  task: TodoTask;
-   onDelete: (id: number) => void;
-   onEdit: (task: TodoTask) => void;
+  task: TodoTaskDto;
 } 
 
-function TaskItem({ task, onDelete, onEdit}: TaskItemProps){
+function TaskItem({task}: TaskItemProps){
+    const dispatch = useAppDispatch();
+    const [isEditing , setIsEditing] = useState(false);
+
+    const handleDelete = () =>{
+        dispatch(deleteTodoTask(task.id));
+    }
+
+    const handleUpdate =()=> {
+        setIsEditing(false);
+    }
+
     return(
          <div className={styles['item']}>
           <div className={styles['item-wrap']}>
@@ -17,8 +29,21 @@ function TaskItem({ task, onDelete, onEdit}: TaskItemProps){
                 <h3 className={styles['due-date']}>due-date: {task.dueDate.split("T")[0]}</h3>
               </div>
               <div className={styles['item-buttons']}>
-                <button onClick={() => onEdit(task)}>Edit</button>
-                <DeleteTodoTaskBtn onClick={() => onDelete(task.id)}/>
+                  <button className={styles['item-button']} onClick={()=>setIsEditing(true)}>Edit</button>
+                  { isEditing && (
+                      <div className={styles.overlay}>
+                            <div className={styles.modal}>
+                                <EditTodoTaskBtn task={task} onTaskUpdated={handleUpdate}/>
+                                <button onClick={() => setIsEditing(false)} className={styles['close']}>close</button>
+                            </div>
+                      </div>
+                  )}
+                  <button
+                      className={styles['noteDeleteBtn']}
+                      onClick={handleDelete}
+                  >
+                      Delete
+                  </button>
               </div>
           </div>
     </div>
