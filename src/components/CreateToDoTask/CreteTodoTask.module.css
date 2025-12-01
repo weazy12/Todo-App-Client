@@ -15,3 +15,14 @@
     flex-direction: column;
     margin-bottom: 20px;
 }
+.create-btn{
+    background: rgb(166, 218, 240);
+    cursor: pointer;    
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0px;
+}
+.create-btn:hover{
+    background: rgb(135, 201, 223);
+    
+}

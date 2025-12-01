@@ -4,15 +4,16 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;
+    position: relative;   
 }
 .column-wrapper{
     display: flex;
-    gap: 120px;
-    align-items: center;
+    flex-direction: row; /* або видалити, бо row за замовчуванням */
+    gap: 50px; /* можеш коригувати відстань між колонками */
+    align-items: flex-start;
     justify-content: center;
-    padding: 50px 50px;
-
+    padding: 50px;
 }
 .overlay {
   position: fixed;
@@ -42,6 +43,8 @@
   margin-top: 15px;
   cursor: pointer;
 }
+
 .create-btn{
-  margin-top: 30px;
+  position: absolute;
+  top: 20px;
 }

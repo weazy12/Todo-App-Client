@@ -1,21 +1,20 @@
 .column-wrapper{
-    text-align: center;
     display: flex;
     flex-direction: column;
     gap: 1px;
 }
-.column-items-wrapper{
-    text-align: start;
-    min-width: 250px;
+.column-items-wrapper {
+    flex: 1; /* щоб колонки рівномірно займали простір */
     min-height: 500px;
+    min-width: 350px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);   
 }
-
 .title {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 12px;
+  text-align: center;
 }
 .todoTitle {
   color: #28a745;

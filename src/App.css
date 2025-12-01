@@ -1,6 +1,19 @@
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+
+
 .app{
   max-width: 1218px;
-  padding: 25px 24px 30px 24px;
+  padding: 25px 12px 30px 12px;
   margin: 0 auto;
 }
 .title-todo{
