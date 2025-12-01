@@ -69,7 +69,7 @@ function CreateTaskForm({onTaskCreated}: CreateTaskFormProps) {
         />
       </div>
         {error && <p>{error}</p>}
-      <button type="submit" disabled={loading}>Create</button>
+      <button className={styles['create-btn']} type="submit" disabled={loading}>Create</button>
     </form>
   )
 }

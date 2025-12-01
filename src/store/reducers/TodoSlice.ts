@@ -1,4 +1,4 @@
-import type {UpdateTodoTaskDto, CreateTodoTaskDto, TodoTaskDto} from "../../types/TodoTask.ts";
+import type {UpdateTodoTaskDto, CreateTodoTaskDto, TodoTaskDto, Status} from "../../types/TodoTask.ts";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {API_BASE_URL} from "../../helpers/API.ts";
@@ -48,7 +48,7 @@ export const updateTodoTask = createAsyncThunk(
             const response = await axios.put<TodoTaskDto>(API_BASE_URL, note)
             return response.data;
         } catch(e){
-            return thunkAPI.rejectWithValue(`Cannot update note with message ${e}.`);
+            return thunkAPI.rejectWithValue(`Cannot update task with message ${e}.`);
         }
     }
 )
@@ -61,6 +61,18 @@ export const deleteTodoTask = createAsyncThunk(
             return id;
         } catch (e) {
             return thunkAPI.rejectWithValue(`Cannot delete note. ${e}`);
+        }
+    }
+);
+
+export const updateStatusTodoTask = createAsyncThunk(
+    'todos/updateStatusTodoTask',
+    async (updateData: { id: number; status: Status },thunkAPI)=>{
+        try{
+            const response = await axios.put<TodoTaskDto>(`${API_BASE_URL}/update-status`, updateData);
+            return response.data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(`Cannot update status task with message ${e}.`);
         }
     }
 );
@@ -125,6 +137,23 @@ export const todoSlice = createSlice({
                 state.tasks = state.tasks.filter(n => n.id !== action.payload);
             })
             .addCase(deleteTodoTask.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload as string;
+            })
+            // Update status todos
+            .addCase(updateStatusTodoTask.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateStatusTodoTask.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedTask = action.payload;
+                const index = state.tasks.findIndex(t => t.id === updatedTask.id);
+                if (index !== -1) {
+                    state.tasks[index] = updatedTask;
+                }
+            })
+            .addCase(updateStatusTodoTask.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload as string;
             });
