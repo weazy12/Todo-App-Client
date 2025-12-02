@@ -68,8 +68,11 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    right: 67px;
+    right: 72px;
     top: 20px;
+}
+.item-button-details:hover{
+    background-color: #ccc;
 }
 .details-form{
     display: flex;
@@ -87,4 +90,28 @@
     border: none;
     margin-top: 15px;
     cursor: pointer;
+}
+.noteDeleteBtn{
+    border-radius: 6px;
+    border: none;
+    background: rgb(248, 126, 126);
+    cursor: pointer;
+    padding: 4px
+}
+.noteDeleteBtn:hover{
+    background: rgb(240, 94, 94);
+}
+.item-button-edit{
+    border-radius: 6px;
+    background: rgb(166, 218, 240);
+    border: none;
+    cursor: pointer;
+    padding: 4px
+}
+.item-button-edit:hover{
+    background: rgb(135, 201, 223);
+}
+.done {
+    text-decoration: line-through;
+    opacity: 0.6; /* необов'язково, але виглядає краще */
 }

@@ -15,4 +15,9 @@
 .updateBtn{
     margin-top: 20px;
     margin-bottom: 20px;
+    background: rgb(166, 218, 240);
+    border: none;    
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 8px 0px;
 }

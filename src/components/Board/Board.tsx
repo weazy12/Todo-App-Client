@@ -55,7 +55,6 @@ function Board() {
       {openModal && (
         <div className={styles.overlay}>
           <div className={styles.modal}>
-            <h2>Create Task</h2>
             <CreateToDoTask onTaskCreated={handleTaskCreated} />
             <button
               onClick={() => setOpenModal(false)}
@@ -68,8 +67,10 @@ function Board() {
       )}
       <DragDropContext onDragEnd={handleDragEnd}>
       <div className={styles['column-wrapper']}>
-        {loading && <p>Loading...</p>}
-        {error && <p className="error">{error}</p>}
+        <div className={styles.statusBar}>
+          {loading && <p className={styles.loading}>Loading...</p>}
+          {error && <p className={styles.error}>{error}</p>}
+        </div>
         <Column droppableId="0" title="ToDo" tasks={tasks.filter((t) => t.status === 0)} />
         <Column
           droppableId="1"

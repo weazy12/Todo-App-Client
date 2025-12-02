@@ -49,12 +49,11 @@ function TaskItem({task, index}: TaskItemProps){
           >
             <div className={styles['item-wrap']}>
               <div className={styles['item-texts']}>
-                <h3 className={styles['item-title']}>{task.title}</h3>
-                <h3 className={styles['due-date']}>due-date: {task.dueDate.split("T")[0]}</h3>
+                <h3  className={`${styles['item-title']} ${task.status === 2 ? styles['done'] : ''}`}>{task.title}</h3>
+                <h3 className={`${styles['due-date']} ${task.status === 2 ? styles['done'] : ''}`}>due-date: {task.dueDate.split("T")[0]}</h3>
               </div>
-
               <div className={styles['item-buttons']}>
-                <button className={styles['item-button']} onClick={()=>setIsEditing(true)}>Edit</button>
+                <button className={styles['item-button-edit']} onClick={()=>setIsEditing(true)}>Edit</button>
 
                 {isEditing && (
                   <div className={styles.overlay}>

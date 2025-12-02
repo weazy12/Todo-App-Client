@@ -3,7 +3,7 @@ import Board from './Board';
 import '@testing-library/jest-dom';
 import {useAppSelector } from '../../hooks/redux';
 
-// 1. Мокаємо CSS
+
 jest.mock('./Board.module.css', () => ({
   board: 'board',
   overlay: 'overlay',
@@ -13,14 +13,13 @@ jest.mock('./Board.module.css', () => ({
   'column-wrapper': 'column-wrapper',
 }));
 
-// 2. Мокаємо Redux hooks
 const mockDispatch = jest.fn();
 jest.mock('../../hooks/redux', () => ({
   useAppDispatch: () => mockDispatch,
   useAppSelector: jest.fn(),
 }));
 
-// 3. Мокаємо підкомпоненти
+
 jest.mock('../CreateToDoTask/CreateToDoTask', () => {
   return ({ onTaskCreated }: { onTaskCreated: () => void }) => (
     <div data-testid="create-todo-task">
@@ -38,7 +37,7 @@ jest.mock('../Column/Column', () => {
   );
 });
 
-// 4. Тести
+
 describe('Board Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();

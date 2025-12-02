@@ -7,6 +7,7 @@
 .create-title{
     text-align: center;
     margin-bottom: 20px;
+    font-size: 30px;
 }
 .inputs-wrapper{
     display: flex;

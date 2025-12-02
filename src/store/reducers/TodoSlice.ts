@@ -112,6 +112,7 @@ export const todoSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload as string;
             })
+            // Update todos
             .addCase(updateTodoTask.pending, (state) => {
                 state.loading = true;
                 state.error = null;

@@ -13,7 +13,7 @@
     gap: 50px; /* можеш коригувати відстань між колонками */
     align-items: flex-start;
     justify-content: center;
-    padding: 50px;
+    padding: 75px 50px 50px 50px;
 }
 .overlay {
   position: fixed;
@@ -47,4 +47,17 @@
 .create-btn{
   position: absolute;
   top: 20px;
+  border-radius: 6px;
+  border: none;
+  padding: 6px 12px;
+  background: rgb(166, 218, 240);
+  cursor: pointer;
+}
+.create-btn:hover{
+  background: rgb(135, 201, 223);
+}
+.statusBar{
+  position: absolute;
+  top: 50px;
+  display: block;
 }
